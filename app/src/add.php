@@ -13,7 +13,7 @@ if (!empty($_POST)) {
         $request = $pdo->prepare($sql);
         $request->execute(['name' => $productName]);
 
-        $message = 'Le produit est ajouté avec succé';
+        $message = 'Le produit: '.$productName.' est ajouté avec succé';
         $class = 'success';
     }
     

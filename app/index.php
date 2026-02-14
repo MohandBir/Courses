@@ -7,6 +7,7 @@ $sql = "SELECT * FROM product ";
 $request = $pdo->prepare($sql);
 $request->execute();
 $products = $request->fetchAll(PDO::FETCH_ASSOC);
+$request->closeCursor();
 
 //var_dump($products[0]);
 
@@ -14,7 +15,6 @@ $products = $request->fetchAll(PDO::FETCH_ASSOC);
 if (!empty($_GET)){
     $message = $_GET['message'];
     $class = $_GET['class'];
-   
 }
 ?>
 
@@ -37,17 +37,15 @@ if (!empty($_GET)){
     <ul>
         <? foreach ($products as $product ) {?> 
         <li>
+            
             <div class="product-name"><?php echo htmlspecialchars($product['name']) ?></div>
-            <a href="src/delete.php" onclick="
-                return confirm('êtes vous sûr de supprimer le produit <?= htmlspecialchars($product['name']) ?>');
+            <a href="src/delete.php?id=<?= $product['id']?>" onclick="
+                return confirm('êtes vous sûr de supprimer le produit: <?= htmlspecialchars($product['name']) ?>');
             ">❌</a>      
             <a href="src/update.php?id=<?= $product['id'] ?>">✏️</a>
         </li>
         <?php } ?>
     </ul>
 
-    <script>
-        
-    </script>
 </body>
 </html>
