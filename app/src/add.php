@@ -1,5 +1,5 @@
 <?php
-
+require 'service/function-verif.php';
 $pdo = new \PDO('mysql:host=mysql;dbname=courses;charset=utf8mb4','user','pwd');
 
 if (!empty($_POST)) {
@@ -21,13 +21,4 @@ if (!empty($_POST)) {
     exit;
 }
 
-function nameVerif($productName){
-    if (empty($productName)){
-        return 'la saisi est vide';
-    }
-    if (strlen($productName) > 50){
-        return 'Le nom de produit ne doit pas dépasser 50 caractères';
-    }
-
-}
 
