@@ -1,3 +1,7 @@
+body {
+    display: flex;
+    flex-direction: column;
+}
 li {
     display: flex;
 
@@ -10,4 +14,18 @@ li {
 a {
     text-decoration: none;
     margin-left: 10px;
+}
+
+.message{
+    margin-top: 77px;
+    position: absolute ;
+    font-size: 20px;
+    align-self: center;
+    text-align: left;
+}
+.success {
+    color: green;
+}
+.error {
+    color: red;
 }

@@ -11,7 +11,11 @@ $products = $request->fetchAll(PDO::FETCH_ASSOC);
 //var_dump($products[0]);
 
 // Afficher tous les produits dans le HTML ci-dessous avec un foreach
-
+if (!empty($_GET)){
+    $message = $_GET['message'];
+    $class = $_GET['class'];
+   
+}
 ?>
 
 <!DOCTYPE html>
@@ -23,9 +27,10 @@ $products = $request->fetchAll(PDO::FETCH_ASSOC);
     <title>Liste de courses</title>
 </head>
 <body>
+    <p class="message <?= (isset($class)) ? $class: '' ?>"><?=  (isset($message)) ? htmlspecialchars($message): '' ?></p>
     <h1>Liste de courses :</h1>
-    <form action="???" method="post">
-        <label for="product">Produit : </label>
+    <form action="src/add.php" method="post">
+        <label for="item">Produit : </label>
         <input type="text" name="item">
         <input type="submit" value="Ajouter">
     </form>
@@ -33,8 +38,10 @@ $products = $request->fetchAll(PDO::FETCH_ASSOC);
         <? foreach ($products as $product ) {?> 
         <li>
             <div class="product-name"><?php echo htmlspecialchars($product['name']) ?></div>
-            <a href="">❌</a>      
-            <a href="">✏️</a>
+            <a href="src/delete.php" onclick="
+                return confirm('êtes vous sûr de supprimer le produit <?= htmlspecialchars($product['name']) ?>');
+            ">❌</a>      
+            <a href="src/update.php?id=<?= $product['id'] ?>">✏️</a>
         </li>
         <?php } ?>
     </ul>
